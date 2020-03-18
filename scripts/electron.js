@@ -1,6 +1,9 @@
 const {dialog} = require('electron').remote
 const fs = require('fs');
 const isDefined = require('is-defined-eval');
+const exec = require('child_process').exec;
+var nodeConsole = require('console');
+var console = new nodeConsole.Console(process.stdout, process.stderr);
 
 // Shell var a const in the main process. 
 // This is the rederer prodcess - so it is ok. 
@@ -127,6 +130,9 @@ function saveMarkdownFile(fileName, data) {
         }
 
         store.currentFile = fileName;
+        execute('claat export ' + fileName, (output) => {
+            console.log(output);
+        });
         UIkit.notify({
             message: 'Saved file ' + fileName,
             status: 'info',
@@ -135,6 +141,7 @@ function saveMarkdownFile(fileName, data) {
         });
         return true;
     });
+    // call the function
 }
 
 function saveFile() {
@@ -229,6 +236,12 @@ function openFileFile() {
         var text = '[' + title + '](' + fileName + ")";
 
         insertLine(doc, store.pos, text);
+    });
+};
+
+function execute(command, callback) {
+    exec(command, (error, stdout, stderr) => { 
+        callback(stdout); 
     });
 };
 
