@@ -1,9 +1,9 @@
 {
-  "name": "electron-markdown-editor",
-  "productName": "ElectronMarkdownEditor",
-  "version": "2.1.8",
+  "name": "codelabs-editor",
+  "productName": "CodelabsEditor",
+  "version": "1.0.0",
   "electronVersion": "2.0.9",
-  "description": "A markdown editor built with electron, uikit, and markdown-it",
+  "description": "A codelabs editor",
   "keywords": [
     "markdown",
     "editor",
@@ -14,7 +14,7 @@
   ],
   "main": "app.js",
   "bin": {
-    "electron-markdown-editor": "./bin/electron-markdown-editor"
+    "electron-markdown-editor": "./bin/codelabs-editor"
   },
   "scripts": {
     "clean:dist": "rm -rf ./dist",
@@ -24,9 +24,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/diversen/electron-markdown-editor.git"
+    "url": "https://github.com/conacyt-arquitectura/codelabs-editor.git"
   },
-  "author": "Dennis Iversen",
+  "author": "CONACYT",
   "license": "MIT",
   "dependencies": {
     "codemirror": "^5.30.0",
