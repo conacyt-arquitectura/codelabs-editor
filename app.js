@@ -37,6 +37,7 @@ function createWindow() {
     mainWindow.setMenu(null);
     // mainWindow.setFullScreen(true)
     mainWindow.showUrl(__dirname + '/index.html', args);
+    //    mainWindow.showUrl('/home/daniel/git/conacyt-codelabs/output/api-guidelines/index.html', args);
     
     mainWindow.on('closed', () => {
         // Dereference the window object, usually you would store windows
