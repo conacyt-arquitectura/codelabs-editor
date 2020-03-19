@@ -1,4 +1,4 @@
-const {dialog} = require('electron').remote
+const {dialog, BrowserWindow} = require('electron').remote
 const fs = require('fs');
 const isDefined = require('is-defined-eval');
 const exec = require('child_process').exec;
@@ -130,20 +130,51 @@ function saveMarkdownFile(fileName, data) {
         }
 
         store.currentFile = fileName;
-        execute('claat export ' + fileName, (output) => {
-            console.log(output);
-        });
-        UIkit.notify({
-            message: 'Saved file ' + fileName,
-            status: 'info',
-            timeout: 2000,
-            pos: 'bottom-left'
-        });
-        return true;
+        let codelabDir = parseFileId(data);
+        if(!codelabDir){
+            UIkit.notify({
+                message: 'el archivo debe tener un "id: [file-name]"',
+                status: 'danger',
+                pos: 'bottom-left'
+            });
+        }else{
+            execute('claat export ' + fileName, (error, output) => {
+                if(error){
+                    UIkit.notify({
+                        message: 'No se puede generar el preview ' + error,
+                        status: 'danger',
+                        timeout: 5000,
+                        pos: 'bottom-left'
+                    });
+                }else{
+                    let win = new BrowserWindow({ width: 800, height: 600 })
+                    win.on('closed', () => {
+                        win = null
+                    })
+                    win.loadURL(`file://${__dirname}/${codelabDir}/index.html`)
+                }
+            });
+            UIkit.notify({
+                message: 'Archivo guardado ' + fileName,
+                status: 'primary',
+                timeout: 2000,
+                pos: 'bottom-left'
+            });
+            return true;
+        }
     });
     // call the function
 }
 
+function parseFileId(data){
+    try {
+        return data.match(/id:.*/)[0].split(":")[1].trim();
+      }
+      catch(error) {
+        return undefined;
+      }
+      
+}
 function saveFile() {
 
     if (typeof store.currentFile === "undefined" || store.currentFile == null) {
@@ -241,7 +272,7 @@ function openFileFile() {
 
 function execute(command, callback) {
     exec(command, (error, stdout, stderr) => { 
-        callback(stdout); 
+        callback(error, stdout, stderr); 
     });
 };
 

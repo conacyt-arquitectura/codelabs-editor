@@ -5,7 +5,9 @@ const shell = require('electron').shell;
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 
-var readFile = null;
+let readFile = null;
+let mainWindow = null;
+
 
 // require('electron-debug')({showDevTools: true});
 
@@ -14,7 +16,7 @@ process.argv.forEach(function (val, index, array) {
    if (index == 2) {
        readFile = val;
    } else {
-       readfile = null;
+      readFile = null;
    }
 });
 
@@ -27,7 +29,6 @@ function createWindow() {
             javascript : false
         };
     
-    let mainWindow;
     mainWindow = window.createWindow(options); 
     
     let args = {
@@ -37,8 +38,7 @@ function createWindow() {
     mainWindow.setMenu(null);
     // mainWindow.setFullScreen(true)
     mainWindow.showUrl(__dirname + '/index.html', args);
-    //    mainWindow.showUrl('/home/daniel/git/conacyt-codelabs/output/api-guidelines/index.html', args);
-    
+        
     mainWindow.on('closed', () => {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time

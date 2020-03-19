@@ -142,7 +142,7 @@
 [data-mode='split'] .uk-htmleditor-code,
 [data-mode='split'] .uk-htmleditor-preview {
   float: left;
-  width: 50%;
+  width: 100%;
 }
 [data-mode='split'] .uk-htmleditor-code {
   border-right: 1px solid #eee;
