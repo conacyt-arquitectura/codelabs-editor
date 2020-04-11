@@ -184,9 +184,8 @@ export default {
       const browserWindow = remote.BrowserWindow;
       const focusedWindow = browserWindow.getFocusedWindow();
 
-      dialog.showOpenDialog(
-        focusedWindow,
-        {
+      dialog
+        .showOpenDialog(focusedWindow, {
           title: 'Open Dialog',
           filters: [
             {
@@ -195,12 +194,10 @@ export default {
             },
           ],
           properties: ['openFile'],
-        },
-        item => {
-          if (item) {
-            const path = item[0];
-
-            // 編集済み：合保存するか確認ダイアログを表示する
+        })
+        .then(result => {
+          if (result) {
+            const path = result.filePaths[0];
             this.saveModifyFile();
             if (fs.shouldEncrypt(path)) {
               this.openKeyPrompt('open', path);
@@ -208,8 +205,10 @@ export default {
               this.readFile(path);
             }
           }
-        },
-      );
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     readFile(path) {
       if (this.path === path) {
