@@ -4,7 +4,8 @@
       <textarea ref="editor" v-model="code" />
     </div>
     <div v-if="isPreview == true" class="preview">
-      <iframe title="Navigation menu" :src="htmlCode" />
+      <div v-if="isPreview == true" class="preview"><div class="markdown-body" v-html="htmlCode" /></div>
+      <!-- <iframe title="Navigation menu" :src="htmlCode" /> -->
     </div>
     <DropField />
     <KeyPrompt @done="onKeyPromptDone" />
@@ -61,7 +62,7 @@ export default {
         if (!value) return;
 
         this.$nextTick(() => {
-          this.htmlCode = 'https://www.jornada.com.mx/ultimas';
+          this.htmlCode = this.markdown.render(this.code);
         });
       },
       immediate: true,
@@ -132,7 +133,7 @@ export default {
       this.$store.dispatch('updateCode', newCode);
 
       if (this.code && this.isPreview) {
-        this.htmlCode = 'file:///home/daniel/git/conacyt-codelabs/output/api-guidelines/index.html';
+        this.htmlCode = this.markdown.render(this.code);
       }
     }, 300),
     /**
