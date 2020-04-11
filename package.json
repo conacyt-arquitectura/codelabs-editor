@@ -1,50 +1,91 @@
 {
-  "name": "codelabs-editor",
-  "productName": "CodelabsEditor",
-  "version": "1.0.0",
-  "electronVersion": "2.0.9",
-  "description": "A codelabs editor",
-  "keywords": [
-    "markdown",
-    "editor",
-    "electron",
-    "commonmark",
-    "markdown-it",
-    "uikit"
-  ],
-  "main": "app.js",
-  "bin": {
-    "electron-markdown-editor": "./bin/codelabs-editor"
-  },
-  "scripts": {
-    "clean:dist": "rm -rf ./dist",
-    "build:osx": "electron-packager . $npm_package_productName --out=dist --ignore='^/dist$' --overwrite --prune --asar --arch=all --platform=darwin --icon=./resources/icon.icns --version=$npm_package_electronVersion --app-version=$npm_package_version",
-    "build:win": "electron-packager . $npm_package_productName --out=dist --arch=all --platform=win32 --ignore='^/dist$' --prune --asar --overwrite --icon=./resources/icon.ico --version=$npm_package_electronVersion --app-version=$npm_package_version",
-    "build:linux": "electron-packager . $npm_package_productName --out=dist --arch=x64 --platform=linux --ignore='^/dist$' --prune --asar --overwrite --icon=./resources/icon.png --version=$npm_package_electronVersion --app-version=$npm_package_version"
+  "name": "conacyt",
+  "version": "3.2.1",
+  "private": true,
+  "description": "A Simple Markdown Editor",
+  "homepage": "https://github.com/hiro0218/Miikun#readme",
+  "bugs": {
+    "url": "https://github.com/hiro0218/Miikun/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conacyt-arquitectura/codelabs-editor.git"
+    "url": "git+https://github.com/hiro0218/Miikun.git"
   },
-  "author": "CONACYT",
   "license": "MIT",
-  "dependencies": {
-    "codemirror": "^5.30.0",
-    "detect-process": "^1.0.4",
-    "electron": "^2.0.9",
-    "electron-debug": "^1.4.0",
-    "electron-window": "^0.8.1",
-    "highlightjs": "^8.7.0",
-    "is-defined-eval": "^1.0.3",
-    "is-electron": "^2.1.0",
-    "isbinaryfile": "^3.0.2",
-    "jquery": "^3.4.1",
-    "markdown-it-embed-mathjax-highlight": "^1.0.5",
-    "markdown-table-template": "^1.0.1",
-    "mathjax": "^2.7.2",
-    "plist": "^3.0.1",
-    "relative": "^3.0.2",
-    "uikit": "^2.27.4"
+  "author": "hiro <hiro0218@gmail.com>",
+  "main": "background.js",
+  "scripts": {
+    "build": "vue-cli-service build",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "format:scss": "stylelint --fix ./src",
+    "postinstall": "electron-builder install-app-deps",
+    "lint": "vue-cli-service lint",
+    "lint:scss": "stylelint ./src",
+    "serve": "vue-cli-service serve",
+    "postuninstall": "electron-builder install-app-deps"
   },
-  "devDependencies": {}
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "codemirror": "^5.52.0",
+    "core-js": "^3.6.4",
+    "debounce": "^1.2.0",
+    "markdown-it": "^10.0.0",
+    "markdown-it-checkbox": "^1.1.0",
+    "markdown-it-footnote": "^3.0.2",
+    "normalize.css": "^8.0.1",
+    "prismjs": "^1.15.0",
+    "vue": "^2.6.11",
+    "vue-electron": "^1.0.6",
+    "vue-meta": "^2.2.1",
+    "vue-router": "^3.1.5",
+    "vuetify": "^1.5.5",
+    "vuex": "^3.1.2",
+    "vuex-persistedstate": "^2.5.4"
+  },
+  "devDependencies": {
+    "@hiro0218/eslint-config": "^1.2.0",
+    "@hiro0218/prettier-config": "^1.0.2",
+    "@vue/cli-plugin-babel": "^4.2.2",
+    "@vue/cli-plugin-eslint": "^4.2.2",
+    "@vue/cli-service": "^4.2.2",
+    "babel-eslint": "^10.0.3",
+    "electron": "^8.0.1",
+    "electron-devtools-installer": "^2.2.4",
+    "eslint": "^6.1.0",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
+    "markdown-it-anchor": "^5.2.5",
+    "markdown-it-deflist": "^2.0.3",
+    "markdown-it-multimd-table": "^4.0.1",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
+    "sass-loader": "^7.1.0",
+    "stylelint": "^13.2.0",
+    "stylelint-config-property-sort-order-smacss": "^6.0.0",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.2.0",
+    "stylelint-scss": "^3.14.2",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-electron-builder": "^1.4.5",
+    "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.0.5"
+  },
+  "productName": "miikun"
 }

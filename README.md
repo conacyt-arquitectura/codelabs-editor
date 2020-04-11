@@ -1,12 +1,26 @@
-# Conacyt codelab editor
+# miikun
 
-## Install
+> A Simple Markdown Editor
 
-    git clone https://github.com/conacyt-arquitectura/codelabs-editor.git
-    cd codelabs-editor 
-    npm install
+<img src="screenshot.png">
 
-Run codelabs-editor: 
+## Build Setup
 
-    ./bin/codelabs-editor README.md
+``` bash
+# install dependencies
+yarn install
 
+# serve
+yarn electron:serve
+
+# build electron app for production
+yarn electron:build
+
+# lint all JS/Vue component files in `app/src`
+yarn lint
+```
+More information can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/).
+
+---
+
+This project was generated from [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about this project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
